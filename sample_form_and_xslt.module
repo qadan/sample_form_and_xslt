@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Sample thingzz.
+ */
+
+/**
+ * Implements hook_islandora_xml_form_builder_forms()
+ */
+function sample_form_and_xslt_islandora_xml_form_builder_forms() {
+  return array(
+    'MusicBrainz Artist XML' => array(
+      'form_file' => 'xml/musicbrains_artist.xml',
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_xml_form_builder_form_associations()
+ */
+function sample_form_and_xslt_islandora_xml_form_builder_form_associations() {
+  return array(
+    'musicbrainz_artist_xml' => array(
+      'content_model' => 'islandora:personCModel',
+      'form_name' => 'MusicBrains Artist XML',
+      'dsid' => 'MMD',
+      'title_field' => array('root-artist', 'name'),
+      'transform' => 'No Transform',
+      'template' => FALSE,
+    ),
+  );
+}

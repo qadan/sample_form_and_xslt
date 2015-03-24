@@ -1,0 +1,8 @@
+name = Sample Form And XSLT
+description = Just sample things lol
+core = 7.x
+version = 7.x-dev
+dependencies[] = islandora
+dependencies[] = islandora_entities
+dependencies[] = xml_form_builder
+package = Islandora Tools
