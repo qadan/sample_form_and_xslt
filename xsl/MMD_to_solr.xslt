@@ -97,7 +97,7 @@
                 <xsl:attribute name="name">
                   <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'release-event-list_release_date_', $suffix), ' ', '_')"/>
                 </xsl:attribute>
-                <xsl:value-of select="normalize-space(./mmd:release-event-list/mmd:release/@date"/>
+                <xsl:value-of select="normalize-space(./mmd:release-event-list/mmd:release/@date)"/>
               </field>
             </xsl:if>
             <xsl:if test="./mmd:release-event-list/mmd:release/@country != ''">
@@ -113,7 +113,7 @@
               <xsl:for-each select="./mmd:disc-list/mmd:disc">
                 <field>
                   <xsl:attribute name="name">
-                    <xsl:value-of select="tranlate(concat($ARTIST_PREFIX, 'release_list_', $RELEASE-TYPE, 'release-event-list_disc-list_disc_id_', $suffix), ' ', '_')"/>
+                    <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release_list_', $RELEASE-TYPE, 'release-event-list_disc-list_disc_id_', $suffix), ' ', '_')"/>
                   </xsl:attribute>
                   <xsl:value-of select="normalize-space(./mmd:disc-list/mmd:disc/@id)"/>
                 </field>
