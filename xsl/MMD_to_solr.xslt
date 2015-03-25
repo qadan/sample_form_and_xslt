@@ -11,10 +11,16 @@
         <xsl:param name="suffix">_ms</xsl:param>
 
         <xsl:for-each select="$content//mmd:artist">
-          <xsl:variable name="BASE_ID" select="normalize-space(./@id)"/>
-          <xsl:variable name="ID" select="translate($BASE_ID, ' ', '_')"/>
-          <xsl:variable name="ARTIST_PREFIX" select="concat($prefix, 'artist_', $ID, '_')"/>
+          <xsl:variable name="ARTIST_PREFIX" select="concat($prefix, 'artist_')"/>
 
+          <xsl:if test="./@id != ''">
+            <field>
+              <xsl:attribute name="name">
+                <xsl:value-of select="concat($ARTIST_PREFIX, 'id', $suffix)"/>
+              </xsl:attribute>
+              <xsl:value-of select="translate(normalize-space(./@id), ' ', '-')"/>
+            </field>
+          </xsl:if>
           <xsl:if test="./mmd:name != ''">
             <field>
               <xsl:attribute name="name">
@@ -87,15 +93,15 @@
             <xsl:if test="./mmd:title != ''">
               <field>
                 <xsl:attribute name="name">
-                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'title_', $suffix), ' ', '_')"/>
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'title', $suffix), ' ', '_')"/>
                 </xsl:attribute>
                 <xsl:value-of select="normalize-space(./mmd:title)"/>
               </field>
             </xsl:if>
-            <xsl:if test="./mmd:release-event-list/mmd:release/@date">
+            <xsl:if test="./mmd:release-event-list/mmd:release/@date != ''">
               <field>
                 <xsl:attribute name="name">
-                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'release-event-list_release_date_', $suffix), ' ', '_')"/>
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'release-event-list_release_date', $suffix), ' ', '_')"/>
                 </xsl:attribute>
                 <xsl:value-of select="normalize-space(./mmd:release-event-list/mmd:release/@date)"/>
               </field>
@@ -103,7 +109,7 @@
             <xsl:if test="./mmd:release-event-list/mmd:release/@country != ''">
               <field>
                 <xsl:attribute name="name">
-                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'release-event-list_release_country_', $suffix), ' ', '_')"/>
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'release-event-list_release_country', $suffix), ' ', '_')"/>
                 </xsl:attribute>
                 <xsl:value-of select="normalize-space(./mmd:release-event-list/mmd:release/@country)"/>
               </field>
@@ -113,9 +119,9 @@
               <xsl:for-each select="./mmd:disc-list/mmd:disc">
                 <field>
                   <xsl:attribute name="name">
-                    <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release_list_', $RELEASE-TYPE, 'release-event-list_disc-list_disc_id_', $suffix), ' ', '_')"/>
+                    <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release_list_', $RELEASE-TYPE, 'release-event-list_disc-list_disc_id', $suffix), ' ', '_')"/>
                   </xsl:attribute>
-                  <xsl:value-of select="normalize-space(./mmd:disc-list/mmd:disc/@id)"/>
+                  <xsl:value-of select="normalize-space(./@id)"/>
                 </field>
               </xsl:for-each>
             </xsl:if>
@@ -123,7 +129,7 @@
             <xsl:if test="./mmd:track-list/@count != ''">
               <field>
                 <xsl:attribute name="name">
-                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'track-list_', $suffix), ' ', '_')"/>
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'track-list', $suffix), ' ', '_')"/>
                 </xsl:attribute>
                 <xsl:value-of select="normalize-space(./mmd:track-list/@count)"/>
               </field>
