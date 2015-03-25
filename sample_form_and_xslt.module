@@ -11,7 +11,7 @@
 function sample_form_and_xslt_islandora_xml_form_builder_forms() {
   return array(
     'MusicBrainz Artist XML' => array(
-      'form_file' => 'xml/musicbrains_artist.xml',
+      'form_file' => drupal_get_path('module', 'sample_form_and_xslt') . '/xml/musicbrainz_artist.xml',
     ),
   );
 }
@@ -23,7 +23,7 @@ function sample_form_and_xslt_islandora_xml_form_builder_form_associations() {
   return array(
     'musicbrainz_artist_xml' => array(
       'content_model' => 'islandora:personCModel',
-      'form_name' => 'MusicBrains Artist XML',
+      'form_name' => 'MusicBrainz Artist XML',
       'dsid' => 'MMD',
       'title_field' => array('root-artist', 'name'),
       'transform' => 'No Transform',
