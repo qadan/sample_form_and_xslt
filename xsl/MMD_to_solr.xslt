@@ -28,7 +28,8 @@
                  <field name="solr_field_label">Field content</field>
                  A whole bunch of these strung together, and you have yourself
                  a complete Solr doc! It'll be contained within the necessary
-                 tags for the Solr REST request. -->
+                 tags for the Solr REST request when Gsearch runs the 
+                 foxmlToSolr XSLT and sends it off to the REST API. -->
             <field>
               <!-- So, give it the 'name' attribute assembled from the prefix,
                    an identifying label, and the suffix, and then ... -->
