@@ -52,9 +52,82 @@
           </xsl:if>
 
           <xsl:for-each select="./mmd:relation-list">
+            <xsl:variable name="TARGET-TYPE" select="concat(normalize-space(./@target-type), '_')"/>
+            <xsl:variable name="TYPE" select="concat(normalize-space(./relation/@type), '_')"/>
+
+            <xsl:if test="./mmd:relation/@target != ''">
+              <field>
+                <xsl:attribute name="name">
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'relation-list_', $TARGET-TYPE, 'relation_', $TYPE, 'target', $suffix), ' ', '_')"/>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(./mmd:relation/@target)"/>
+              </field>
+            </xsl:if>
+            <xsl:if test="./mmd:relation/mmd:artist/@id != ''">
+              <field>
+                <xsl:attribute name="name">
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'relation-list_', $TARGET-TYPE, 'relation_', $TYPE, 'artist_id', $suffix), ' ', '_')"/>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(./mmd:relation/mmd:artist/@id)"/>
+              </field>
+            </xsl:if>
+            <xsl:if test="./mmd:relation/mmd:artist/mmd:name != ''">
+              <field>
+                <xsl:attribute name="name">
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'relation-list_', $TARGET-TYPE, 'relation_', $TYPE, 'artist_name', $suffix), ' ', '_')"/>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(./mmd:relation/mmd:artist/mmd:name)"/>
+              </field>
+            </xsl:if>
           </xsl:for-each>
 
           <xsl:for-each select="./mmd:release-list">
+            <xsl:variable name="RELEASE-TYPE" select="concat(normalize-space(./@id), '_')"/>
+
+            <xsl:if test="./mmd:title != ''">
+              <field>
+                <xsl:attribute name="name">
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'title_', $suffix), ' ', '_')"/>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(./mmd:title)"/>
+              </field>
+            </xsl:if>
+            <xsl:if test="./mmd:release-event-list/mmd:release/@date">
+              <field>
+                <xsl:attribute name="name">
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'release-event-list_release_date_', $suffix), ' ', '_')"/>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(./mmd:release-event-list/mmd:release/@date"/>
+              </field>
+            </xsl:if>
+            <xsl:if test="./mmd:release-event-list/mmd:release/@country != ''">
+              <field>
+                <xsl:attribute name="name">
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'release-event-list_release_country_', $suffix), ' ', '_')"/>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(./mmd:release-event-list/mmd:release/@country)"/>
+              </field>
+            </xsl:if>
+
+            <xsl:if test="./mmd:disc-list/mmd:disc">
+              <xsl:for-each select="./mmd:disc-list/mmd:disc">
+                <field>
+                  <xsl:attribute name="name">
+                    <xsl:value-of select="tranlate(concat($ARTIST_PREFIX, 'release_list_', $RELEASE-TYPE, 'release-event-list_disc-list_disc_id_', $suffix), ' ', '_')"/>
+                  </xsl:attribute>
+                  <xsl:value-of select="normalize-space(./mmd:disc-list/mmd:disc/@id)"/>
+                </field>
+              </xsl:for-each>
+            </xsl:if>
+
+            <xsl:if test="./mmd:track-list/@count != ''">
+              <field>
+                <xsl:attribute name="name">
+                  <xsl:value-of select="translate(concat($ARTIST_PREFIX, 'release-list_', $RELEASE-TYPE, 'track-list_', $suffix), ' ', '_')"/>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(./mmd:track-list/@count)"/>
+              </field>
+            </xsl:if>
           </xsl:for-each>
 
         </xsl:for-each>

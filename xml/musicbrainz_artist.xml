@@ -752,7 +752,7 @@
                           <value>&lt;release-event-list&gt;&lt;release/&gt;&lt;/release-event-list&gt;</value>
                         </create>
                         <read>
-                          <path>mmd:release-event-list</path>
+                          <path>mmd:release-event-list/mmd:release</path>
                           <context>parent</context>
                         </read>
                         <update>
